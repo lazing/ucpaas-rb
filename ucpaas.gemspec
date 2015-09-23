@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ryan Wong"]
   spec.email         = ["lazing@gmail.com"]
   spec.summary       = %q{UCPAAS API wrapper}
-  spec.homepage      = "https://github.com/lazing/ucpaas"
+  spec.homepage      = "https://github.com/lazing/ucpaas-rb"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
