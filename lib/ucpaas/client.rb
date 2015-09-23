@@ -27,6 +27,7 @@ module Ucpaas
   class Client
     include Sms
     include Call
+    include Manage
 
     ATTRIBUTES = %w(base_url sid token soft_version).freeze
     attr_reader(*ATTRIBUTES)

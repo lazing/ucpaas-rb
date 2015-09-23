@@ -19,12 +19,12 @@ RSpec.describe Ucpaas::Manage do
     post_resp = {
       'resp' => {
         'respCode' => '000000',
-        'client' => {}
+        'client' => { 'clientNumber' => '11111' }
       }
     }
     expect(subject).to receive(:get).and_return(get_resp)
     expect(subject).to receive(:post).and_return(post_resp)
     client = subject.find_or_create_client 'appid', '+8618888888888'
-    expect(client).not_to be_nil
+    expect(client).to have_key('clientNumber')
   end
 end
