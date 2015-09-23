@@ -1,5 +1,6 @@
 require 'faraday'
 require 'logger'
+require 'base64'
 require 'ucpaas/manage'
 require 'ucpaas/sms'
 require 'ucpaas/call'
@@ -46,7 +47,7 @@ module Ucpaas
       logger.info { format('GET: %s %s', origin, params) }
       resp = connection.get do |request|
         time = formated_time
-        request.url path(origin), params.merge(sign: sign(time))
+        request.url path(origin), params.merge(sig: sign(time))
         request.headers.merge!(headers(time))
       end
       handle(resp)
@@ -56,7 +57,7 @@ module Ucpaas
       logger.info { format('POST: %s %s', origin, params) }
       resp = connection.post do |request|
         time = formated_time
-        request.url path(origin), sign: sign(time)
+        request.url path(origin), sig: sign(time)
         request.headers.merge!(headers(time))
         request.body = MultiJson.dump(params)
       end
@@ -65,6 +66,7 @@ module Ucpaas
 
     def handle(resp)
       logger.debug { resp }
+      fail UcpaasError, resp.status unless resp.status == 200
       response = MultiJson.load(resp.body)
       resp_code = response['resp']['respCode']
       return response if resp_code == '000000'
@@ -83,7 +85,7 @@ module Ucpaas
 
     def headers(time)
       {
-        accept: 'json',
+        accept: 'application/json',
         content_type: 'application/json;charset=utf-8;',
         authorization: authorization(time)
       }

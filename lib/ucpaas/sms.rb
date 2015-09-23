@@ -7,10 +7,10 @@ module Ucpaas
           appId: app_id,
           templateId: tmp_id,
           to: mobile,
-          params: params.map(&:to_s).join(',')
+          param: params.map(&:to_s).join(',')
         }
       }
-      post '/Messages/TemplateSMS.json', data
+      post '/Messages/templateSMS.json', data
     end
   end
 end

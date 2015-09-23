@@ -13,5 +13,17 @@ module Ucpaas
       new_client = post('/Clients', params)
       new_client['resp']['client']
     end
+
+    def clients(app_id, start = 0, limit = 10)
+      params = {
+        client: {
+          appId: app_id,
+          start: start,
+          limit: limit
+        }
+      }
+      response = post('/clientList', params)
+      response['resp']['client']
+    end
   end
 end
