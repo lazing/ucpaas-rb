@@ -1,5 +1,6 @@
 # 云之讯 UCPAAS Ruby REST API Client
 [![Circle CI](https://circleci.com/gh/lazing/ucpaas-rb.svg?style=svg)](https://circleci.com/gh/lazing/ucpaas-rb)
+[![Gem Version](https://badge.fury.io/rb/ucpaas.svg)](http://badge.fury.io/rb/ucpaas)
 
 https://github.com/lazing/ucpaas-rb
 
