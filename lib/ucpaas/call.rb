@@ -5,11 +5,13 @@ module Ucpaas
       client = find_or_create_client(app_id, from_number)
       client_number = client['clientNumber']
       data = {
-        appId: app_id,
-        fromClient: client_number,
-        to: to_number
-      }.merge(options)
-      response = post('/Calls/callBack', data)
+        callback: {
+          appId: app_id,
+          fromClient: client_number,
+          to: to_number
+        }.merge(options)
+      }
+      response = post('/Calls/callBack.json', data)
       response['resp']['callback']
     end
 

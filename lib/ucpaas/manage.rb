@@ -3,14 +3,14 @@ module Ucpaas
   module Manage
     def find_or_create_client(app_id, mobile, options = {})
       mob = mobile.gsub(/^\+?86/, '')
-      client_info = get('/ClientsByMobile', appId: app_id, mobile: mob)
+      client_info = get('/ClientsByMobile.json', appId: app_id, mobile: mob)
       return client_info['resp']['client'] if client_info['resp']['client']
       params = {
         appId: app_id,
         clientType: 0,
         mobile: mob
       }.merge(options)
-      new_client = post('/Clients', params)
+      new_client = post('/Clients.json', params)
       new_client['resp']['client']
     end
 
@@ -22,7 +22,7 @@ module Ucpaas
           limit: limit
         }
       }
-      response = post('/clientList', params)
+      response = post('/clientList.json', params)
       response['resp']['client']
     end
   end
